@@ -8,6 +8,6 @@ app.get('/', function(request, response){
 });
 
 app.set('port', (process.env.PORT || 5000));
-app.listen(1337);
+app.listen(app.get('port'));
 
 console.log('Here we go!');
