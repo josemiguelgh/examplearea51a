@@ -1,0 +1,22 @@
+{
+  "name": "curso-mean",
+  "version": "1.0.0",
+  "description": "aplicacion para aprender mean",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josemiguelgh/examplearea51a.git"
+  },
+  "author": "@josemiguelgh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josemiguelgh/examplearea51a/issues"
+  },
+  "homepage": "https://github.com/josemiguelgh/examplearea51a#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
