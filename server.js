@@ -75,6 +75,29 @@ externalRouter.get('/error', function(req, res){
 app.use('/admin', adminRouter);
 app.use('/external', externalRouter);
 
+app.route('/account')
+.get(function(req, res){
+  var message = 'Method GET';
+  console.log(message);
+  res.send(message);
+})
+.post(function(req, res){
+  var message = 'Method POST';
+  console.log(message);
+  res.send(message);
+})
+.put(function(req, res){
+  var message = 'Method PUT';
+  console.log(message);
+  res.send(message);
+})
+.delete(function(req, res){
+  var message = 'Method DELETE';
+  console.log(message);
+  res.send(message);
+})
+
+
 app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'));
 
