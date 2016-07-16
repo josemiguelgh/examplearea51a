@@ -1,6 +1,4 @@
 //call the packages
-
-var mongoose = require('mongoose');
 var express = require('express');
 var app = express();
 //nos sirve para definir las rutas que voy a trabajar en mi aplicacion
@@ -10,6 +8,9 @@ var externalRouter = express.Router();
 //var publicRouter = express.Router();
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
+var mongoose = require('mongoose');
+var User = require('./db/user');
+
 
 var port = process.env.PORT || 5000;
 
@@ -42,13 +43,51 @@ var apiRouter = express.Router();
 
 //Accesed at GET http://localhost:5000/api
 apiRouter.get('/', function(req, res){
-  res.json({ message: 'Stop to try hit me and hit me!' });
+  // res.json({ message: 'Stop to try hit me and hit me!' });
+  res.json({ message: 'Welcome to Zion! (Our mother API)' });
 });
+
+//ROutes /users
+apiRouter.route('/users')
+//Create a user through post
+//URL: http:localhost:5000/api/users
+.post(function(req, res){
+  var user = new User();
+  user.name = req.body.name;
+  user.username = req.body.username;
+  user.password = req.body.password;
+
+  user.save(function(err){
+    //Verify duplicate entry on username
+    if(err){
+      if(err.code == 11000){ //mongo
+        console.log(err);
+        return res.json({success: false, message: 'El nombre es duplicado' })
+      }
+    }
+
+    res.json({message: 'El usuario se ha creado'});
+  });
+})
+//Create a user through get
+//URL: http:localhost:5000/api/users
+.get(function(req, res){
+  User.find(function(err, users){
+    if(err){
+      return res.send(err);
+    }
+
+    res.json(users);
+  });
+})
+
 
 //Register our Routes
 app.use('/api', apiRouter);
 
 app.listen(port);
+
+//console.log('Neo comes over port ' + port);
 console.log('Neo comes over port ' + port);
 
 
