@@ -10,10 +10,9 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var User = require('./db/user');
-
+var Pokemon = require('./db/pokemon');
 
 var port = process.env.PORT || 5000;
-
 
 //APP CONFIGURATION
 app.use(bodyParser.urlencoded({ extended:true }));
@@ -84,8 +83,119 @@ apiRouter.route('/users')
 
     res.json(users);
   });
+
+
+});
+
+apiRouter.route('/users/:user_id')
+.get(function(req, res){
+  User.findById(req.params.user_id, function(err, user){
+    if(err){
+      return res.send(err);
+    }
+    res.json(user);
+  });
+})
+.put(function(req, res){
+  User.findById(req.params.user_id, function(err, user){
+    if(err){
+      return res.send(err);
+    }
+    if(req.body.name){
+      user.name = req.body.name;
+    }
+    if(req.body.username){
+      user.username = req.body.username;
+    }
+    if(req.body.password){
+      user.password = req.body.password;
+    }
+
+    user.save(function(err){
+      if(err){
+        return res.send(err);
+      }
+
+      res.json({message: 'Usuario actualizado'});
+    });
+  });
+})
+.delete(function(req, res){
+  User.findByIdAndRemove(req.params.user_id, function(err, user){
+    if(err){
+      return res.send(err);
+    }
+    res.json({message: 'Usuario eliminado'});
+  });
 })
 
+//ROutes /pokemons
+apiRouter.route('/pokemons')
+.get(function(req, res){
+  Pokemon.find(function(err, pokemons){
+    if(err){
+      return res.send(err);
+    }
+
+    res.json(pokemons);
+  });
+})
+.post(function(req, res){
+  var pokemon = new Pokemon();
+  pokemon.name = req.body.name;
+  pokemon.pokemonType = req.body.pokemonType;
+
+  pokemon.save(function(err){
+    if(err){
+      if(err.code == 11000){ //mongo
+        console.log(err);
+        return res.json({success: false, message: 'El nombre es duplicado' })
+      }
+    }
+
+    res.json({message: 'El pokemon se ha creado'});
+  });
+});
+
+apiRouter.route('/pokemons/:pokemon_id')
+.get(function(req, res){
+  Pokemon.findById(req.params.pokemon_id, function(err, pokemon){
+    if(err){
+      return res.send(err);
+    }
+
+    res.json({message: pokemon.sayHi()});
+  });
+})
+.put(function(req, res){
+  Pokemon.findById(req.params.pokemon_id, function(err, pokemon){
+    if(err){
+      return res.send(err);
+    }
+    if(req.body.name){
+      pokemon.name = req.body.name;
+    }
+    if(req.body.pokemonType){
+      pokemon.pokemonType = req.body.pokemonType;
+    }
+
+    pokemon.save(function(err){
+      if(err){
+        return res.send(err);
+      }
+
+      res.json({message: 'Pokemon actualizado'});
+    });
+  });
+})
+.delete(function(req, res){
+  Pokemon.findByIdAndRemove(req.params.pokemon_id, function(err, pokemon){
+    if(err){
+      return res.send(err);
+    }
+    res.json({message: 'Pokemon eliminado'});
+  });
+})
 
 //Register our Routes
 app.use('/api', apiRouter);
@@ -94,12 +204,6 @@ app.listen(port);
 
 //console.log('Neo comes over port ' + port);
 console.log('Neo comes over port ' + port);
-
-
-
-
-
-
 
 
 
