@@ -24,16 +24,15 @@ var PokemonSchema = new Schema({
 
 PokemonSchema.post('findOne', function(pokemon){
   console.log('hi');
-  // var pokemon = this;
-  // pokemon.timesInvoked = pokemon.timesInvoked + 1;
-  // pokemon.save(function(err){
-  //   if(err){
-  //     console.log(err);
-  //     return res.send(err);
-  //   }
-  //   console.log('Pokemon actualizado a ' + pokemon.timesInvoked);
-  //   return next();
-  // });
+
+  pokemon.timesInvoked = pokemon.timesInvoked + 1;
+  pokemon.save(function(err){
+    if(err){
+      console.log(err);
+      return res.send(err);
+    }
+    console.log('Pokemon actualizado a ' + pokemon.timesInvoked);
+  });
 });
 
 
