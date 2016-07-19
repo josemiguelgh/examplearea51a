@@ -30,7 +30,12 @@ app.use(function(req, res, next){
 //
 app.use(morgan('dev'));
 
-mongoose.connect('mongodb://localhost/pokemon');
+if(port == 5000){
+  mongoose.connect('mongodb://localhost/pokemon');
+}else {
+  mongoose.connect('mongodb://admin:admin@ds023105.mlab.com:23105/pokemon');
+}
+
 
 //API ROUTES
 //Main/basic route
