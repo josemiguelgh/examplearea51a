@@ -8,9 +8,12 @@ var externalRouter = express.Router();
 //var publicRouter = express.Router();
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
+var jwt = require('jsonwebtoken');
 var mongoose = require('mongoose');
 var User = require('./db/user');
 var Pokemon = require('./db/pokemon');
+
+var superSecret = 'strangeThingsHappenedInArea51';
 
 var port = process.env.PORT || 5000;
 
@@ -49,6 +52,41 @@ var apiRouter = express.Router();
 apiRouter.get('/', function(req, res){
   // res.json({ message: 'Stop to try hit me and hit me!' });
   res.json({ message: 'Welcome to Zion! (Our mother API)' });
+});
+
+apiRouter.post('/authenticate', function(req, res){
+  User.findOne({
+    username: req.body.username,
+  })
+  .select('name username password')
+  .exec(function(err, user){
+    if(err){
+      throw err;
+    }
+    //Username was not found
+    if(!user){
+      res.json({
+        success: false,
+        message: 'La autenticacion ha fallado. El usuario NO existe.'
+      })
+    } else if (user) {
+      //validate if password matches
+      var validPassword = user.comparePassword(req.body.password);
+
+      if(!validPassword){
+        res.json({
+          success: false,
+          message: 'La autenticacion ha fallado. Contrasenia incorrecta'
+        });
+      }else{
+        //If authenticate process is ok, then generate a token
+        res.json({
+          success: true,
+          message: 'Swordfish: Acceso Autorizado'
+        });
+      }
+    }
+  });
 });
 
 //ROutes /users

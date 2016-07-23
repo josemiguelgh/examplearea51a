@@ -19,6 +19,10 @@ var PokemonSchema = new Schema({
     type: Number,
     required: true,
     default: 0
+  },
+  owner:{
+    type: Schema.ObjectId,
+    ref: 'User'
   }
 });
 
