@@ -86,7 +86,7 @@ apiRouter.post('/authenticate', function(req, res){
           username: user.username,
         }, superSecret,
         {
-          expiresIn: '24h'
+          expiresIn: '2h'
         });
 
         res.json({
@@ -132,7 +132,6 @@ apiRouter.get('/', function(req, res){
     message: 'Welcome to the Matrix!'
   });
 });
-
 
 apiRouter.route('/me')
 .get(function(req, res){
