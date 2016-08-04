@@ -41,9 +41,9 @@ if(port == 5000){
 
 //API ROUTES
 //Main/basic route
-app.get('/', function(req, res){
-  res.send('Welcome to the real world');
-});
+// app.get('/', function(req, res){
+//   res.send('Welcome to the real world');
+// });
 
 //Express router instance
 var apiRouter = express.Router();
@@ -288,6 +288,12 @@ apiRouter.route('/pokemons/:pokemon_id')
 
 //Register our Routes
 app.use('/api', apiRouter);
+
+app.use(express.static(__dirname + '/public'));
+
+app.get('*', function(req, res){
+  res.sendFile(path.join(__dirname + '/public/views/index.html'))
+});
 
 app.listen(port);
 
