@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="bower_components/lumx/dist/lumx.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script type="text/javascript" src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>
     <script type="text/javascript" src="js/app.routes.js"></script>
@@ -18,18 +20,32 @@
     <script type="text/javascript" src="bower_components/velocity/velocity.js"></script>
     <script type="text/javascript" src="bower_components/moment/min/moment-with-locales.js"></script>
     <script type="text/javascript" src="bower_components/lumx/dist/lumx.js"></script>
+    <!-- <script src="bower_components/jquery/src/jquery.js"></script> -->
+    <!--Importing jQuery-->
 
   </head>
   <body>
     <h1>Gotta catch em all!</h1>
     <header>
-      <nav>
+      <!-- <nav>
         <a href="/">Home</a>
         <a href="/login">Login</a>
         <a href="/users">Usuarios</a>
         <a href="/pokemons">Pokemons</a>
-      </nav>
+        <div class="p+" ng-controllers="mainCtrl as main">
+          <lx-button lx-type="flat">Home</lx-button>
+          <lx-button lx-type="flat">Login</lx-button>
+          <lx-button lx-type="flat" ng-click="main.goTo('/users')">Usuarios</lx-button>
+          <lx-button lx-type="flat" ng-click="main.goTo('/pokemons')">Pokemons</lx-button>
+        </div>
+      </nav> -->
 
+      <div class="p+" ng-controller="mainCtrl as main">
+        <lx-button lx-type="flat" ng-click="main.goTo('/login')">Home</lx-button>
+        <lx-button lx-type="flat" ng-click="main.goTo('/login')">Login</lx-button>
+        <lx-button lx-type="flat" ng-click="main.goTo('/users')">Usuarios</lx-button>
+        <lx-button lx-type="flat" ng-click="main.goTo('/pokemons')">Pokemons</lx-button>
+      </div>
 
     </header>
 
