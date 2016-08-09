@@ -16,4 +16,42 @@
     <lx-button lx-type="fab"><i class="mdi mdi-plus"></i></lx-button>
     <lx-button lx-type="icon"><i class="mdi mdi-plus"></i></lx-button>
 </div>
+
+
+<div flex-item="6" class="mt++">
+      <span class="fs-title display-block mb">Avatar with text and icon</span>
+
+      <div class="divider divider--dark"></div>
+
+      <!-- <div class="p+" flex-container="row" flex-gutter="24">
+        <div flex-item>
+            <div class="card">
+                <div class="toolbar">
+                    <lx-search-filter>
+                        <input type="text" ng-model="pokemon.by_name">
+                    </lx-search-filter>
+                </div>
+            </div>
+        </div>
+      </div> -->
+
+      <ul class="list mt++">
+          <li class="list-row list-row--has-separator" ng-repeat="item in user.users">
+
+
+              <div class="list-row__content">
+                  <span>{{ item.name }}</span>
+              </div>
+
+              <div class="list-row__secondary">
+                  <lx-icon lx-id="information" lx-size="xs" lx-color="grey" lx-type="flat"></lx-icon>
+              </div>
+          </li>
+
+          <!-- <li ng-repeat="item in pokemon.pokemons.data">
+
+          </li> -->
+
+      </ul>
+  </div>
 </div>
