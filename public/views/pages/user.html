@@ -23,18 +23,6 @@
 
       <div class="divider divider--dark"></div>
 
-      <!-- <div class="p+" flex-container="row" flex-gutter="24">
-        <div flex-item>
-            <div class="card">
-                <div class="toolbar">
-                    <lx-search-filter>
-                        <input type="text" ng-model="pokemon.by_name">
-                    </lx-search-filter>
-                </div>
-            </div>
-        </div>
-      </div> -->
-
       <ul class="list mt++">
           <li class="list-row list-row--has-separator" ng-repeat="item in user.users">
 
@@ -45,13 +33,33 @@
 
               <div class="list-row__secondary">
                   <lx-icon lx-id="information" lx-size="xs" lx-color="grey" lx-type="flat"></lx-icon>
+                  <button type="button" ng-click="getUser(item._id)">
+                    Detalles
+                  </button>
               </div>
           </li>
 
-          <!-- <li ng-repeat="item in pokemon.pokemons.data">
-
-          </li> -->
-
       </ul>
   </div>
+
+  <div>
+    <div>Id: {{ user.currentUser._id }}</div>
+    Name: <input type="text" name="name" ng-model="user.currentUser.name"><br>
+    Username: <input type="text" name="username" ng-model="user.currentUser.username"><br>
+    <!-- <div>Username: {{ user.currentUser.username }}</div> -->
+    <button type="button" ng-click="updateUser(user.currentUser)">
+      Actualizar
+    </button>
+  </div>
+
+<br>
+<br>
+
+  Name: <input type="text" name="name" ng-model="newuser.name"><br>
+  Username: <input type="text" name="username" ng-model="newuser.username"><br>
+  Password: <input type="text" name="password" ng-model="newuser.password"><br>
+
+  <button type="button" ng-click="createUser(newuser)">
+    Guardar
+  </button>
 </div>
