@@ -17,7 +17,7 @@
     <script type="text/javascript" src="js/controllers/pokemonCtrl.js"></script>
     <script type="text/javascript" src="js/controllers/userCtrl.js"></script>
     <script type="text/javascript" src="js/services/pokemonService.js"></script>
-    <!-- <script type="text/javascript" src="js/services/authService.js"></script> -->
+    <script type="text/javascript" src="js/services/authService.js"></script>
     <script type="text/javascript" src="js/services/userService.js"></script>
     <script type="text/javascript" src="js/app.directives.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
@@ -48,8 +48,10 @@
       <div class="p+" ng-controller="mainCtrl as main">
         <lx-button lx-type="flat" ng-click="main.goTo('/login')">Home</lx-button>
         <lx-button lx-type="flat" ng-click="main.goTo('/login')">Login</lx-button>
-        <lx-button lx-type="flat" ng-click="main.goTo('/users')">Usuarios</lx-button>
-        <lx-button lx-type="flat" ng-click="main.goTo('/pokemons')">Pokemons</lx-button>
+        <lx-button lx-type="flat" ng-click="main.goTo('/users')" ng-if="main.loggedIn">Usuarios</lx-button>
+        <lx-button lx-type="flat" ng-click="main.goTo('/pokemons')" ng-if="main.loggedIn">Pokemons</lx-button>
+        <!-- <lx-button lx-type="flat" ng-click="main.goTo('/users')">Usuarios</lx-button>
+        <lx-button lx-type="flat" ng-click="main.goTo('/pokemons')">Pokemons</lx-button> -->
       </div>
 
     </header>

@@ -6,6 +6,7 @@ angular.module('pokeApp', [
   'pokeApp.userCtrl',
   'pokeApp.pokemonServices',
   'pokeApp.userServices',
+  'pokeApp.authService',
   'lumx'
 ])
 .config(function($httpProvider){
